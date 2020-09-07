@@ -12,4 +12,5 @@ Code for book: The New And Improved Flask Mega Tutorial
 [x] Ch5
 [x] Ch6
 [x] Ch7
-[] Ch8
+[x] Ch8
+[] Ch9
