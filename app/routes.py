@@ -4,7 +4,7 @@ from werkzeug.urls import url_parse
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Post
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, ResetPasswordRequestForm, ResetPasswordForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, ResetPasswordRequestForm, ResetPasswordForm, EmptyForm
 from app.email import send_password_reset_email
 
 @app.before_request
@@ -82,8 +82,9 @@ def user(username):
         if posts.has_next else None
     prev_url = url_for('user', username=user.username, page=posts.prev_num) \
         if posts.has_prev else None
+    form = EmptyForm()
     return render_template(
-        'user.html', user=user, posts=posts.items, prev_url=prev_url, next_url=next_url)
+        'user.html', user=user, posts=posts.items, prev_url=prev_url, next_url=next_url, form=form)
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
@@ -100,7 +101,7 @@ def edit_profile():
         form.about_me.data = current_user.about_me
     return render_template('edit_profile.html', title='Edit profile', form=form)
 
-@app.route('/follow/<username>')
+@app.route('/follow/<username>', methods=['POST'])
 @login_required
 def follow(username):
     user = User.query.filter_by(username=username).first()
@@ -115,7 +116,7 @@ def follow(username):
     flash('You are now following {}'.format(username))
     return redirect(url_for('user', username=username))
 
-@app.route('/unfollow/<username>')
+@app.route('/unfollow/<username>', methods=['POST'])
 @login_required
 def unfollow(username):
     user = User.query.filter_by(username=username).first()
