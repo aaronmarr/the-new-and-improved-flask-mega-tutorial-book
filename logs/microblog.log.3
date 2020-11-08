@@ -1,0 +1,80 @@
+2020-09-06 18:20:51,206 ERROR: Exception on /user/amy [GET] [in /home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1277, in _execute_context
+    self.dialect.do_execute(
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 593, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: followers
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/flask_login/utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "/home/aaron/Code/flask-book/app/routes.py", line 76, in user
+    return render_template('user.html', user=user, posts=posts)
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/flask/templating.py", line 137, in render_template
+    return _render(
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/flask/templating.py", line 120, in _render
+    rv = template.render(context)
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/jinja2/environment.py", line 1090, in render
+    self.environment.handle_exception()
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/jinja2/environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/jinja2/_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "/home/aaron/Code/flask-book/app/templates/user.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/home/aaron/Code/flask-book/app/templates/base.html", line 30, in top-level template code
+    {% block content %}{% endblock %}
+  File "/home/aaron/Code/flask-book/app/templates/user.html", line 11, in block "content"
+    <p>{{ user.followers.count() }} followers, {{ user.followed.count() }} following</p>
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/sqlalchemy/orm/dynamic.py", line 335, in count
+    return self._clone(sess).count()
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 3771, in count
+    return self.from_self(col).scalar()
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 3491, in scalar
+    ret = self.one()
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 3458, in one
+    ret = self.one_or_none()
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 3427, in one_or_none
+    ret = list(self)
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 3503, in __iter__
+    return self._execute_and_instances(context)
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 3528, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1014, in execute
+    return meth(self, multiparams, params)
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1127, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1317, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1511, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 178, in raise_
+    raise exception
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1277, in _execute_context
+    self.dialect.do_execute(
+  File "/home/aaron/Code/flask-book/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 593, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: followers
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT user.id AS user_id, user.username AS user_username, user.email AS user_email, user.password_hash AS user_password_hash, user.about_me AS user_about_me, user.last_seen AS user_last_seen 
+FROM user, followers 
+WHERE followers.followed_id = ? AND followers.follower_id = user.id) AS anon_1]
+[parameters: (2,)]
+(Background on this error at: http://sqlalche.me/e/13/e3q8)
